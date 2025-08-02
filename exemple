@@ -54,9 +54,9 @@ Build_docker:
   script:
     - source $VARIABLES_FILE
     - cd myapp1/
-    - docker build -t $CI_REGISTRY/xavki/pipeline/test:v${MVN_VERSION} .
+    - docker build -t $CI_REGISTRY/Saliou/pipeline/test:v${MVN_VERSION} .
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-    - docker push registry.xavki.gitlab:5050/xavki/pipeline/test:v${MVN_VERSION}
+    - docker push registry.Saliou.gitlab:5050/Saliou/pipeline/test:v${MVN_VERSION}
   tags:
   - shell
 
@@ -72,7 +72,7 @@ Ansible_deploy:
   stage: deploy_ansible
   before_script: *ssh
   script:
-    - /usr/bin/git clone git@xavki.gitlab:xavki/ansible_deploy.git
+    - /usr/bin/git clone git@Saliou.gitlab:Saliou/ansible_deploy.git
     - cd ansible_deploy
     - ansible-galaxy install -r requirements.yml -p roles
     - ansible-playbook -i env/dev/hosts -u vagrant install-myapp1.yml

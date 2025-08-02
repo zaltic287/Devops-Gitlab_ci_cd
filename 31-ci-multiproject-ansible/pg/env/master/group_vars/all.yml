@@ -2,6 +2,6 @@ env: master
 docker_docker_conf:
   userns-remap: "dockremap:dockremap"
   insecure-registries: ["192.168.5.5:5000"]
-registry_user: xavki
+registry_user: Saliou
 registry_password: password
 registry_url: "https://192.168.5.5:5000/v2/"

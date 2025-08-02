@@ -60,14 +60,14 @@ helm repo update
 
 ```
 cat values.yaml (https://gitlab.com/gitlab-org/charts/gitlab-runner/blob/main/values.yaml)
-gitlabUrl: "http://xavki.gitlab"
+gitlabUrl: "http://Saliou.gitlab"
 runnerRegistrationToken: "ra7jHgHxjKqF1HsU-ios"
 metrics:
   enabled: false
 runners:
   config: |
     [[runners]]
-      pre_clone_script = "echo '192.168.12.40 xavki.gitlab' >> /etc/hosts"
+      pre_clone_script = "echo '192.168.12.40 Saliou.gitlab' >> /etc/hosts"
       name = "kub1"
       executor = "kubernetes"
       [runners.kubernetes]
@@ -82,7 +82,7 @@ runners:
 hostAliases:
   - ip: "192.168.12.40"
     hostnames:
-    - "xavki.gitlab"
+    - "Saliou.gitlab"
 ```
 
 ---------------------------------------------------------------------------------------------------------

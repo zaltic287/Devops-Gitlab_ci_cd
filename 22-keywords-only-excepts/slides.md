@@ -130,7 +130,7 @@ build:
         - echo "build"
     only:
         variables:
-            - $VARIABLE1 == "xavki" && $VARIABLE2 == "xavki"
+            - $VARIABLE1 == "Saliou" && $VARIABLE2 == "Saliou"
 ```
 
 
@@ -149,7 +149,7 @@ build:
         - echo "build"
     only:
         variables:
-            - $VARIABLE1 == "xavki"
+            - $VARIABLE1 == "Saliou"
         refs:
             - /^xp-.*$/
 ```

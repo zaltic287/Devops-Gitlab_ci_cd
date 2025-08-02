@@ -43,7 +43,7 @@ graph TD;
 \```mermaid
 gantt
 dateFormat  YYYY-MM-DD
-title Xavki's Week
+title Saliou's Week
 section A section
 Prepare Videos            :done,    des1, 2021-11-14,2d
 Record Videos             :active,  des2, 2021-11-15, 4d

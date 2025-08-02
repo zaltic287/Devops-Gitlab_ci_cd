@@ -36,7 +36,7 @@ sudo gitlab-runner register --url http://gitlab.example.com/ --registration-toke
 
 ```
   --non-interactive
-  --url "http://xavki.gitlab/"
+  --url "http://Saliou.gitlab/"
   --registration-token "TPGHnuzJ3a4fyJ2RntRR"
   --executor "shell"
   --description "runner1"
@@ -58,7 +58,7 @@ sudo gitlab-runner register --url http://gitlab.example.com/ --registration-toke
 Runtime platform  arch=amd64 os=linux pid=12293 revision=de104fcd version=14.5.1
 Running in system-mode.                            
 Enter the GitLab instance URL (for example, https://gitlab.com/):
-[http://xavki.gitlab/]: 
+[http://Saliou.gitlab/]: 
 Enter the registration token:
 [TPGHnuzJ3a4fyJ2RntRR]: 
 Enter a description for the runner:
@@ -88,7 +88,7 @@ check_interval = 0
   session_timeout = 1800
 [[runners]]
   name = "test"
-  url = "http://xavki.gitlab/"
+  url = "http://Saliou.gitlab/"
   token = "ii7j5dugPta5Wzits7Cy"
   executor = "shell"
 ```

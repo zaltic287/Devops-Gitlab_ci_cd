@@ -4,7 +4,7 @@
 <br>
 
 https://docs.gitlab.com/ee/user/permissions.html
-http://xavki.gitlab/help/user/permissions
+http://Saliou.gitlab/help/user/permissions
 
 <br>
 

@@ -1,6 +1,6 @@
 FROM alpine/git as clone
 WORKDIR /app
-RUN git clone https://gitlab.com/xavki/api-springboot-postgresql-sample.git
+RUN git clone https://gitlab.com/Saliou/api-springboot-postgresql-sample.git
 
 FROM maven:3.5-jdk-8-alpine as build
 WORKDIR /app

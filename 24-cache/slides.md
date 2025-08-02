@@ -48,7 +48,7 @@ CACHE
 cache:
   - key:
       #files:
-      #  - xavki.txt
+      #  - Saliou.txt
     paths:
       - .lib
 stages:
@@ -58,12 +58,12 @@ j1:
   stage: step1
   script:
     - mkdir -p .lib 
-    - echo toto > .lib/xavki.txt
+    - echo toto > .lib/Saliou.txt
   tags:
     - docker
 j2:
   stage: step2
-  script: cat .lib/xavki.txt
+  script: cat .lib/Saliou.txt
   tags:
     - docker
 ````

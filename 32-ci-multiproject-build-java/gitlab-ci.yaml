@@ -76,7 +76,7 @@ Db:
         PG_DB: "mydatabase"
     stage: database
     trigger:
-        project: xavki/ansible_pg
+        project: Saliou/ansible_pg
         branch: master
         strategy: depend
 
