@@ -1,0 +1,6 @@
+Si DNS PROBLEM pour la registry
+===============================
+
+Il faut ajouter l'@Ip de gitlab et l'url de la registry dans les hosts du laptop si pas de serveur dns: 
+
+192.168.7.10	gitlab.example.com	registry.gitlab.example.com

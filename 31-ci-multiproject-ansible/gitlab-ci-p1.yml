@@ -1,0 +1,21 @@
+stages:
+    - build
+    - database
+build image:
+    stage: build
+    image: docker
+    script:
+        - echo "fiirst part"
+    tags:
+        - docker
+db:
+    variables:
+        PG_USER: "user1"
+        PG_PASSWORD: "password"
+        PG_DB: "mydatabase"
+    stage: database
+    trigger:
+        project: xavki/ansible_pg
+        branch: main
+        strategy: depend
+

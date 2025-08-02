@@ -1,0 +1,6 @@
+- name: install myapp parie1
+  hosts: myapp
+  become: yes
+  roles:
+  - install-docker
+  #- install-app

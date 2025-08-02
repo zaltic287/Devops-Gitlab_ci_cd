@@ -1,0 +1,46 @@
+Vagrant.configure(2) do |config|
+  common = <<-SHELL
+  if ! grep -q runner-shell /etc/hosts; then  sudo echo "192.168.7.11    runner-shell" >> /etc/hosts ;fi
+  if ! grep -q runner-docker /etc/hosts; then  sudo echo "192.168.7.12     runner-docker" >> /etc/hosts ;fi
+  #if ! id saliou >  /dev/null 2>&1 ; then sudo useradd -G 10 -p $(openssl passwd -1 saliou) saliou; fi
+  #if [ ! -f /etc/sudoers.d/saliou ] ; then sudo echo "saliou        ALL=(ALL)       NOPASSWD: ALL" > /etc/sudoers.d/saliou ; fi
+  export DEBIAN_FRONTEND=noninteractive
+  sudo apt-get update -qq 2>&1 >/dev/null
+  sudo apt-get install -y -qq git vim tree net-tools curl telnet git python3-pip sshpass nfs-common 2>&1 >/dev/null
+  sed -i 's/ChallengeResponseAuthentication no/ChallengeResponseAuthentication yes/g' /etc/ssh/sshd_config
+  sudo systemctl restart sshd
+  SHELL
+  
+
+	config.vm.box = "ubuntu/focal64"
+	config.vm.box_url = "ubuntu/focal64"
+	
+	config.vm.define "runner-shell" do |runnershell|
+		runnershell.vm.hostname = "runner-shell"
+		runnershell.vm.network "private_network", ip: "192.168.7.11"
+		runnershell.vm.provider "virtualbox" do |v|
+			v.customize [ "modifyvm", :id, "--cpus", "2" ]
+			v.customize [ "modifyvm", :id, "--memory", "1024" ]
+			v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+      		v.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
+			v.customize ["modifyvm", :id, "--name", "runner-shell"]
+		end
+	config.vm.provision :shell, :inline => common
+		runnershell.vm.provision "shell", path: "install_runner.sh"
+	end
+	config.vm.define "runner-docker" do |runnerdocker|
+		runnerdocker.vm.hostname = "runner-docker"
+		runnerdocker.vm.network "private_network", ip: "192.168.7.12"
+		runnerdocker.vm.provider "virtualbox" do |v|
+			v.customize [ "modifyvm", :id, "--cpus", "2" ]
+			v.customize [ "modifyvm", :id, "--memory", "4048" ]
+			v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+      		v.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
+			v.customize ["modifyvm", :id, "--name", "runner-docker"]
+		end
+	config.vm.provision :shell, :inline => common
+		runnerdocker.vm.provision "shell", path: "runner-docker.sh"
+	end
+
+end
+

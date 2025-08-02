@@ -1,0 +1,3 @@
+ls -ld ~/.ssh # pour voir les droits sur le fichier et son proprietaire
+
+sudo chown vagrant:vagrant ~/.ssh  # changer le propietaire et donner le à utilisareur qui doit y acceder

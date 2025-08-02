@@ -1,0 +1,28 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  # Serveur gitlab
+  config.vm.define "target-ansible" do |targetansible|
+    targetansible.vm.box = "ubuntu/focal64"
+    targetansible.vm.hostname = "target-ansible"
+    targetansible.vm.box_url = "ubuntu/focal64"
+    targetansible.vm.network :private_network, ip: "192.168.7.22"
+    targetansible.vm.provider :virtualbox do |v|
+      v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+      v.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
+      v.customize ["modifyvm", :id, "--memory", 1048]
+      v.customize ["modifyvm", :id, "--name", "target-ansible"]
+      v.customize ["modifyvm", :id, "--cpus", "1"]
+    end
+    config.vm.provision "shell", inline: <<-SHELL
+      sed -i 's/ChallengeResponseAuthentication no/ChallengeResponseAuthentication yes/g' /etc/ssh/sshd_config
+	  sudo systemctl restart sshd
+      service ssh restart
+    SHELL
+    targetansible.vm.provision "shell", path: "targetssh.sh"
+  end
+
+
+end
+

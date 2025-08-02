@@ -1,0 +1,11 @@
+[1] vim ~/.vimrc
+[2] autocmd BufNewFile * 0r ~/.vim/templates/default.txt
+
+Étape 3 : Créer un fichier modèle
+Vous devez maintenant créer un fichier modèle contenant les données que vous souhaitez insérer.
+
+Créez le répertoire pour vos modèles si ce n'est pas déjà fait 
+
+[3] mkdir -p ~/.vim/templates
+[4] vim ~/.vim/templates/default.txt
+[5] Ajoutez-y vos informations

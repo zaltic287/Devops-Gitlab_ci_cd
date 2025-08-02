@@ -1,0 +1,28 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  # Serveur gitlab
+  config.vm.define "target-myapp" do |targetmyapp|
+    targetmyapp.vm.box = "ubuntu/focal64"
+    targetmyapp.vm.hostname = "target-myapp"
+    targetmyapp.vm.box_url = "ubuntu/focal64"
+    targetmyapp.vm.network :private_network, ip: "192.168.7.23"
+    targetmyapp.vm.provider :virtualbox do |v|
+      v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+      v.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
+      v.customize ["modifyvm", :id, "--memory", 1048]
+      v.customize ["modifyvm", :id, "--name", "target-myapp"]
+      v.customize ["modifyvm", :id, "--cpus", "1"]
+    end
+    config.vm.provision "shell", inline: <<-SHELL
+      sed -i 's/ChallengeResponseAuthentication no/ChallengeResponseAuthentication yes/g' /etc/ssh/sshd_config
+	  sudo systemctl restart sshd
+      service ssh restart
+    SHELL
+    targetmyapp.vm.provision "shell", path: "targetssh.sh"
+  end
+
+
+end
+

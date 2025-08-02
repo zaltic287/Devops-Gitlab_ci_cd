@@ -1,0 +1,48 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  # Serveur gitlab
+  config.vm.define "target-ssh" do |targetssh|
+    targetssh.vm.box = "ubuntu/focal64"
+    targetssh.vm.hostname = "target-ssh"
+    targetssh.vm.box_url = "ubuntu/focal64"
+    targetssh.vm.network :private_network, ip: "192.168.7.20"
+    targetssh.vm.provider :virtualbox do |v|
+      v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+      v.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
+      v.customize ["modifyvm", :id, "--memory", 1048]
+      v.customize ["modifyvm", :id, "--name", "target-ssh"]
+      v.customize ["modifyvm", :id, "--cpus", "1"]
+    end
+    config.vm.provision "shell", inline: <<-SHELL
+      sed -i 's/ChallengeResponseAuthentication no/ChallengeResponseAuthentication yes/g' /etc/ssh/sshd_config
+	  sudo systemctl restart sshd
+      service ssh restart
+    SHELL
+    targetssh.vm.provision "shell", path: "targetssh.sh"
+  end
+  
+  config.vm.define "target-ssh2" do |targetssh2|
+    targetssh2.vm.box = "ubuntu/focal64"
+    targetssh2.vm.hostname = "target-ssh2"
+    targetssh2.vm.box_url = "ubuntu/focal64"
+    targetssh2.vm.network :private_network, ip: "192.168.7.21"
+    targetssh2.vm.provider :virtualbox do |v|
+      v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+      v.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
+      v.customize ["modifyvm", :id, "--memory", 1048]
+      v.customize ["modifyvm", :id, "--name", "target-ssh2"]
+      v.customize ["modifyvm", :id, "--cpus", "1"]
+    end
+    config.vm.provision "shell", inline: <<-SHELL
+      sed -i 's/ChallengeResponseAuthentication no/ChallengeResponseAuthentication yes/g' /etc/ssh/sshd_config
+	  sudo systemctl restart sshd
+      service ssh restart
+    SHELL
+    targetssh2.vm.provision "shell", path: "targetssh2.sh"
+  end
+
+
+end
+
